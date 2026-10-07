@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>upay Voice Guard — AI কল এজেন্ট</title>
+  <meta name="description" content="upay Voice Guard: কথা বলেই টাকা পাঠান, ব্যালেন্স জানুন — নিরাপদে।">
+  <link rel="icon" type="image/png" href="/static/upay-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <!-- ── Landing / Start Screen ── -->
+  <div id="screen-landing" class="screen active">
+    <div class="landing-bg"></div>
+    <div class="landing-content">
+      <div class="logo-ring">
+        <div class="logo-inner">
+          <img src="/static/upay-logo.png" alt="upay Voice Guard" class="landing-logo-img">
+        </div>
+      </div>
+      <h1 class="landing-title">upay <span>Voice Guard</span></h1>
+      <p class="landing-sub">কথা বলেই টাকা পাঠান — নিরাপদে, সহজে</p>
+      <button id="btn-start-call" class="btn-call-start" aria-label="কল শুরু করুন">
+        <span class="pulse-ring"></span>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="btn-text">কল করুন</span>
+      </button>
+      <p class="landing-hint">Demo PIN: <code>1234</code></p>
+    </div>
+  </div>
+
+  <!-- ── Call Screen ── -->
+  <div id="screen-call" class="screen">
+    <div class="call-bg"></div>
+
+    <!-- Top bar -->
+    <header class="call-header">
+      <div class="call-status">
+        <span class="dot-live"></span>
+        <span id="call-timer">00:00</span>
+      </div>
+      <div class="call-agent-info">
+        <div class="agent-avatar">
+          <img src="/static/upay-logo.png" alt="upay" class="agent-header-logo">
+        </div>
+        <span class="agent-name">upay Voice Guard</span>
+      </div>
+      <button id="btn-end-call" class="btn-end" aria-label="কল শেষ করুন" title="কল শেষ করুন">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M10.68 13.31a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="1" y1="1" x2="23" y2="23" stroke="#fff" stroke-width="2"/></svg>
+      </button>
+    </header>
+
+    <!-- Voice wave animation -->
+    <div class="voice-wave" id="voice-wave">
+      <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+      <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+      <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+    </div>
+
+    <!-- Chat area -->
+    <div id="chat-area" class="chat-area">
+      <!-- Messages injected here -->
+    </div>
+
+    <!-- Keypad overlay -->
+    <div id="keypad-section" class="keypad-section">
+      <div class="keypad-display">
+        <input type="text" id="keypad-input" class="keypad-input" readonly placeholder="কীপ্যাডে দিন...">
+        <button id="keypad-backspace" class="keypad-backspace" aria-label="মুছুন">⌫</button>
+      </div>
+      <div class="keypad-grid">
+        <button class="kp" data-val="1">1</button>
+        <button class="kp" data-val="2">2<small>ABC</small></button>
+        <button class="kp" data-val="3">3<small>DEF</small></button>
+        <button class="kp" data-val="4">4<small>GHI</small></button>
+        <button class="kp" data-val="5">5<small>JKL</small></button>
+        <button class="kp" data-val="6">6<small>MNO</small></button>
+        <button class="kp" data-val="7">7<small>PQRS</small></button>
+        <button class="kp" data-val="8">8<small>TUV</small></button>
+        <button class="kp" data-val="9">9<small>WXYZ</small></button>
+        <button class="kp kp-star" data-val="*">*</button>
+        <button class="kp" data-val="0">0<small>+</small></button>
+        <button class="kp kp-hash" data-val="#">#</button>
+      </div>
+      <button id="keypad-send" class="keypad-send" aria-label="পাঠান">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2l-7 20-4-9-9-4 20-7z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>পাঠান</span>
+      </button>
+    </div>
+
+    <!-- Speech section -->
+    <div id="speech-section" class="speech-section hidden">
+      <div class="speech-input-row">
+        <button id="btn-mic" class="btn-mic" aria-label="মাইক্রোফোন" title="মাইক্রোফোন দিয়ে কথা বলুন">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" stroke="#fff" stroke-width="2"/><path d="M19 10v2a7 7 0 01-14 0v-2" stroke="#fff" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="19" x2="12" y2="23" stroke="#fff" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="23" x2="16" y2="23" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <input type="text" id="speech-input" class="speech-text-input" placeholder="কথা বলুন বা টাইপ করুন...">
+        <button id="speech-send" class="speech-send-btn" aria-label="পাঠান">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2l-7 20-4-9-9-4 20-7z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div id="mic-status" class="mic-status hidden"></div>
+      <div class="speech-quick-actions">
+        <button class="quick-btn" data-say="হ্যাঁ">✅ হ্যাঁ</button>
+        <button class="quick-btn" data-say="না">❌ না</button>
+        <button class="quick-btn" data-say="ক্যাশ আউট করতে চাই">💸 ক্যাশ আউট</button>
+        <button class="quick-btn" data-say="ব্যালেন্স কত">💰 ব্যালেন্স</button>
+        <button class="quick-btn" data-say="গত মাসে কত খরচ হয়েছে">📊 খরচের হিসাব</button>
+        <button class="quick-btn" data-say="ক্যাশ আউট করতে কত চার্জ লাগে">❓ চার্জ জানুন</button>
+        <button class="quick-btn" data-say="ধন্যবাদ">👋 বিদায়</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Settings Panel (Limit) ── -->
+  <button id="btn-settings-toggle" class="settings-toggle" aria-label="সেটিংস" title="লেনদেন সীমা সেট করুন">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" stroke-width="2"/></svg>
+  </button>
+  <div id="settings-panel" class="settings-panel hidden">
+    <h3>⚙️ লেনদেন সীমা</h3>
+    <p class="settings-desc">প্রতি লেনদেনে সর্বোচ্চ কত টাকা agent পাঠাতে পারবে।</p>
+    <div class="settings-row">
+      <input type="number" id="limit-input" class="limit-input" min="100" max="50000" value="5000" step="100">
+      <span class="limit-unit">৳</span>
+    </div>
+    <button id="btn-set-limit" class="btn-set-limit">সীমা আপডেট করুন</button>
+    <p id="limit-status" class="limit-status"></p>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
