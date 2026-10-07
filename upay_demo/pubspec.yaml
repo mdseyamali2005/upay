@@ -1,0 +1,33 @@
+name: upay_demo
+description: "uPay Demo App - Voice Guard Integration"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  shared_preferences: ^2.3.4
+  url_launcher: ^6.3.1
+  http: ^1.2.2
+  google_fonts: ^6.2.1
+  just_audio: ^0.9.46
+  audio_session: ^0.1.25
+  speech_to_text: ^7.0.0
+  record: ^6.1.0
+  flutter_svg: ^2.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/upay_logo.svg
+    - assets/images/agent_ai.jpg
